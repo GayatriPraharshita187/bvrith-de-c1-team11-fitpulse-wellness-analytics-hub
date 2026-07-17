@@ -1,40 +1,38 @@
 # Problem Charter
 
 **Week:** 1  
-**Owner(s):** [Student names]  
-**Project:** [Project title]
+**Owner(s):** Charka Cherishma,Kanumuri Gayatri Praharshita,Dharavath Sandhya 
+**Project:** FitPulse-Wellness Analytics Hub
 
 ---
 
 ## 1. Problem Context
 
-Explain the domain in simple language.
+FitPulse is a fictional wellness application used by students and young professionals to track workouts, goals, activity streaks, and device usage. The application generates different types of synthetic data such as workout sessions, user profiles, device information, goals, and live activity events.
 
-Prompts:
+Raw data alone is not sufficient because it contains errors such as duplicate workout records, negative workout durations, impossible calorie values, and missing device references. These issues make reports unreliable and can lead to incorrect business decisions.
 
-- What real-world process or operation does this project represent?
-- What kinds of data are generated?
-- Why is raw data not enough?
-- Who would use the final dashboard or metrics?
+The final dashboard will be used by product managers, wellness program managers, device operations teams, and data analysts to monitor user engagement, goal progress, device reliability, and live workout activities.
 
 ---
 
 ## 2. Engineering Problem
 
-Write the data engineering problem clearly.
+The project must transform multiple synthetic raw data sources into trusted Bronze, Silver, Data Quality, Gold, and dashboard-ready outputs using Databricks, Spark SQL, and Power BI.
 
-Example format:
-
-> The project must convert multiple raw source files into trusted Bronze, Silver, Data Quality, Gold, and dashboard-ready outputs using Databricks and Power BI.
+The system should identify and handle data quality issues, create reliable metrics, and support both batch and streaming analytics.
 
 ---
 
 ## 3. Users / Stakeholders
 
-| User / Stakeholder | What they need from the data |
-|---|---|
-| [Example: Operations Head] | [Example: View daily demand and service issues] |
-| [Example: Analyst] | [Example: Compare trends and investigate failures] |
+| User / Stakeholder       | What they need from the data                                    |
+| ------------------------ | --------------------------------------------------------------- |
+| Product Engagement Lead  | Monitor user activity, workout consistency, and streak accuracy |
+| Wellness Program Manager | Track goal completion and identify users falling behind         |
+| Device Operations Lead   | Analyze device reliability and missing activity signals         |
+| Data & Analytics Manager | Access trusted and explainable metrics for decision making      |
+| Business Analysts        | Study trends and generate insights from wellness data           |
 
 ---
 
