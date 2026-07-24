@@ -1,61 +1,72 @@
-# Week 02 Log — [Sprint Name]
+# Week 02 Log — Dataset Design & Data Dictionary
 
-**Week:** 2  
-**Date range:** [Add dates]  
-**Team:** [Team name / number]  
-**Project:** [Project title]
+**Week:** 2
+
+**Date Range:** 17 July 2026 – 24 July 2026
+
+**Team:** 11-DataStreamers
+
+**Students:** Charka Cherishma, Kanumuri Gayatri Praharshita, Dharavath Sandhya
+
+**Project:** FitPulse Wellness Analytics
 
 ---
 
 ## 1. Sprint Goal
 
-Write the goal for this week in 2–3 lines.
+Complete the dataset design for the FitPulse Wellness Analytics project by preparing the data dictionary, documenting synthetic data assumptions, and adding sample raw data files to the GitHub repository.
 
 ---
 
 ## 2. Work Completed
 
-| Task | Owner | Status | Evidence |
-|---|---|---|---|
-| [Task] | [Student] | [Done / In progress] | [file / screenshot / notebook] |
+| Task                                            | Owner                        | Status | Evidence                                                                   |
+| ----------------------------------------------- | ---------------------------- | ------ | -------------------------------------------------------------------------- |
+| Updated Data Dictionary                         | Charka Cherishma             | Done   | `docs/data_dictionary.md`                                                  |
+| Documented Synthetic Data Assumptions           | Kanumuri Gayatri Praharshita | Done   | `docs/synthetic_data_assumptions.md`                                       |
+| Added Sample Raw Data Files                     | Dharavath Sandhya            | Done   | `data_sample/raw/users_samples.csv`, `data_sample/raw/workout_samples.csv` |
+| Reviewed Repository Structure and Documentation | Team                         | Done   | GitHub Repository                                                          |
 
 ---
 
 ## 3. Key Decisions
 
-- [Decision 1]
-- [Decision 2]
+* Used synthetic (dummy) data instead of real user data.
+* Organized the repository according to the required project folder structure.
+* Prepared sample datasets for demonstration and future pipeline development.
 
 ---
 
 ## 4. Blockers / Risks
 
-| Blocker | Impact | Help Needed |
-|---|---|---|
-| [Blocker] | [Impact] | [Help needed] |
+| Blocker                                              | Impact                              | Resolution                                                    |
+| ---------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------- |
+| Sample raw data was not available in the repository. | Delayed completion of Week 2 tasks. | Created synthetic sample datasets for demonstration purposes. |
 
 ---
 
 ## 5. Evidence Added to GitHub
 
-- [File updated]
-- [Screenshot added]
-- [Notebook updated]
+* Updated `docs/data_dictionary.md`
+* Updated `docs/synthetic_data_assumptions.md`
+* Added sample raw data files in `data_sample/raw/`
+* Added `weekly_logs/week02_log.md`
 
 ---
 
 ## 6. AI Transparency Note
 
-| Question | Response |
-|---|---|
-| Where AI helped | [Explain] |
-| What we changed after AI suggestion | [Explain] |
-| What we verified manually | [Explain] |
-| What we can explain without AI | [Explain] |
+| Question                             | Response                                                                                                                               |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Where AI helped                      | AI assisted in understanding the Week 2 requirements, organizing the documentation, and preparing sample raw data examples.            |
+| What we changed after AI suggestions | We reviewed and modified the documentation to ensure it matched the project requirements before uploading it to GitHub.                |
+| What we verified manually            | We manually verified the repository structure, file names, sample data, and documentation before committing the changes to GitHub.     |
+| What we can explain without AI       | We can explain the dataset design, data dictionary, synthetic data assumptions, repository structure, and sample raw data preparation. |
 
 ---
 
 ## 7. Next Week Preparation
 
-- [Action]
-- [Action]
+* Begin data ingestion and preprocessing tasks.
+* Review Week 3 requirements.
+* Prepare the required datasets and preprocessing scripts for the next sprint.
