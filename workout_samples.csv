@@ -1,0 +1,6 @@
+workout_id,user_id,activity,duration_minutes,calories
+W001,U001,Running,30,280
+W002,U002,Cycling,45,420
+W003,U003,Yoga,60,200
+W004,U004,Walking,40,180
+W005,U005,Gym,50,450
