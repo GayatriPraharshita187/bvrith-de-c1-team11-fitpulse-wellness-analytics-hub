@@ -7,7 +7,7 @@
 
 ## 1. Synthetic Data Boundary
 
-This project uses synthetic educational data only. It must not be presented as real company, customer, citizen, player, patient, government, or platform data.
+This project uses synthetic wellness and fitness data only. It must not be presented as real user, patient, customer, company, or healthcare data.
 
 ---
 
@@ -15,11 +15,11 @@ This project uses synthetic educational data only. It must not be presented as r
 
 | Area | Assumption |
 |---|---|
-| Geography / scope | [Example: Hyderabad and nearby regions] |
-| Time period | [Example: July to September 2026] |
-| Source systems | [Example: Two different operational feeds] |
-| Event types | [Example: booking, scan, alert, transaction] |
-| Reference data | [Example: zones, categories, products, venues] |
+| Geography / scope | Hyderabad, Telangana (synthetic wellness data) |
+| Time period | July 2026 – September 2026 |
+| Source systems | Fitness tracker data, workout logs, nutrition records |
+| Event types | Workout, calories burned, heart rate, sleep tracking |
+| Reference data | Exercise types, workout categories, user profiles |
 
 ---
 
@@ -27,10 +27,12 @@ This project uses synthetic educational data only. It must not be presented as r
 
 | File | Approximate Rows | Reason |
 |---|---:|---|
-| `[source_file_1].csv` | [rows] | [reason] |
-| `[source_file_2].csv` | [rows] | [reason] |
-| `[reference_file].csv` | [rows] | [reason] |
-| `[streaming_events].json` | [rows] | [reason] |
+| `users.json` | 100 | Sample user records |
+| `workouts.parquet` | 500 | Workout history |
+| `goals.csv` | 100 | User fitness goals |
+| `devices.csv` | 100 | User device information |
+| `activity_types.csv` | 20 | Activity reference data |
+| `workout_event.json` | 300 | Streaming workout events |
 
 ---
 
