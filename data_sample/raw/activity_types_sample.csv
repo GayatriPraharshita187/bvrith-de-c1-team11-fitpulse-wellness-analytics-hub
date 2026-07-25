@@ -1,0 +1,8 @@
+source_record_id,activity_type_code,activity_name,measure_mode,min_duration_minutes,max_duration_minutes,max_calories_per_minute,max_distance_km,max_repetitions,supports_distance,supports_repetitions
+ATPREC001,WALK,Walking,DISTANCE,8,120,4.8,18.0,0,True,False
+ATPREC002,RUN,Running,DISTANCE,8,150,14.0,35.0,0,True,False
+ATPREC003,CYCLE,Cycling,DISTANCE,10,240,11.5,100.0,0,True,False
+ATPREC004,YOGA,Yoga,DURATION,10,150,5.0,0.0,0,False,False
+ATPREC005,STRENGTH,Strength Training,REPETITIONS,10,180,9.0,0.0,1000,False,True
+ATPREC006,SWIM,Swimming,DISTANCE,10,180,12.0,12.0,0,True,False
+ATPREC007,OTHER,Other Activity,DURATION,5,120,8.0,15.0,500,True,True
