@@ -5,13 +5,13 @@ Date range: 4 August 2026 – 10 August 2026
 Students:
 
 
-Charka Cherishma
-Kanumuri Gayatri Praharshita
-Dharavath Sandhya
+Charka Cherishma,
+Kanumuri Gayatri Praharshita,
+Dharavath Sandhya,
 
 
-Team: 11-DataStreamers
-Project: FitPulse Wellness Analytics
+Team: 11-DataStreamers,
+Project: FitPulse Wellness Analytics,
 
 
 ---
