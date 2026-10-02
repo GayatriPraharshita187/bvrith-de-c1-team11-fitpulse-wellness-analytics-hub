@@ -1,27 +1,62 @@
+
 {
-  "topic_name": "project.events",
-  "implementation_status": "design_only_not_mandatory",
-  "description": "Kafka-style event design for production architecture awareness. Kafka implementation is not required for this internship.",
-  "key": {
-    "field": "event_id",
-    "type": "string"
-  },
-  "value_schema": {
-    "event_id": "string",
-    "event_timestamp": "timestamp",
-    "event_type": "string",
-    "entity_id": "string",
-    "severity": "string",
-    "payload": "object"
-  },
-  "sample_event": {
-    "event_id": "EVT-001",
-    "event_timestamp": "2026-07-03T18:00:00+05:30",
-    "event_type": "alert",
-    "entity_id": "ENT-0001",
-    "severity": "medium",
-    "payload": {
-      "message": "Sample event"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FitPulse Workout Event",
+  "description": "Event contract for simulated FitPulse workout events. Kafka infrastructure is not required.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "event_type",
+    "workout_id",
+    "user_id",
+    "device_id",
+    "activity_type",
+    "event_timestamp",
+    "duration_minutes",
+    "calories_burned",
+    "source_system",
+    "schema_version"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["workout_completed"]
+    },
+    "workout_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "device_id": {
+      "type": "string"
+    },
+    "activity_type": {
+      "type": "string",
+      "enum": ["Running", "Cycling", "Walking"]
+    },
+    "event_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "minimum": 0
+    },
+    "calories_burned": {
+      "type": "number",
+      "minimum": 0
+    },
+    "source_system": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
     }
   }
 }
