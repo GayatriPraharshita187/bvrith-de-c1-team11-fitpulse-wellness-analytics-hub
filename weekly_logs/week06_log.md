@@ -1,92 +1,101 @@
-#Week: 6
+# Week 06 Log — FitPulse Data Quality, Trusted & Quarantine
 
-Date range: 4 August 2026 – 10 August 2026
-
-Students:
-
-
-Charka Cherishma,
-Kanumuri Gayatri Praharshita,
-Dharavath Sandhya,
-
-
-Team: 11-DataStreamers,
-Project: FitPulse Wellness Analytics,
-
+**Week:** 6
+**Date range:** 14 August 2026-20August 2026
+**Team:** Team-11 DataStreamers
+**Project:** FitPulse – Wellness Analytics Hub
 
 ---
 
-##1. Sprint Goal
+## 1. Sprint Goal
 
-Evaluate the Week 5 Silver Candidate data using the approved Week 6 Data Quality rules. Identify data quality issues, retain all rule failures, and route each record correctly to Trusted Silver or Quarantine.
+The goal of Week 6 was to apply the approved FitPulse Data Quality rules to the Silver Candidate tables. Failed records were identified and routed to the appropriate Quarantine tables, while valid records were routed to Trusted Silver. The workflow also retained DQ status, failure information and traceability metadata for validation and downstream processing.
 
-Also, verify that no records are lost or duplicated by performing reconciliation and membership checks.
+---
 
-##2. Work Completed
-Task	Owner	Status	Evidence
-Verified the five Week 5 Candidate tables and prepared baseline count checks	Team 11	Done	04_data_quality_checks.ipynb
-Implemented DQ checks for Activity Types	Team 11	Done	activity_types_checked and activity_types_routed
-Implemented DQ checks and routing for Users	Team 11	Done	trusted_silver_users, quarantine_users
-Implemented DQ checks and routing for Devices	Team 11	Done	trusted_silver_devices, quarantine_devices
-Implemented DQ checks and routing for Goals	Team 11	Done	trusted_silver_goals, quarantine_goals
-Implemented detailed DQ checks and routing for Workouts	Team 11	Done	trusted_silver_workouts, quarantine_workouts
-Added rule failure IDs, failure count and severity for workout records	Team 11	Done	workouts_routed
-Added reconciliation checks to prove Candidate = Trusted + Quarantine	Team 11	In progress	Reconciliation SQL queries
-Added Trusted ∩ Quarantine membership checks	Team 11	In progress	Membership SQL query
-Prepared controlled rerun and Delta history validation	Team 11	In progress	DESCRIBE HISTORY queries
+## 2. Work Completed
 
-The notebook follows the dependency order Activity Types → Users → Devices → Goals → Workouts, using Trusted upstream tables for dependent validations.
+| **Task**                                                                                          | **Owner**                    | **Status** | **Evidence**                                               |
+| ------------------------------------------------------------------------------------------------- | ---------------------------- | ---------- | ---------------------------------------------------------- |
+| Read and verified the Silver Candidate tables produced in Week 5                                  | Charka Cherishma             | Done       | `screenshots/week06_dq_rules.png`                          |
+| Implemented the approved FitPulse DQ rules for Activity Types, Users, Devices, Goals and Workouts | Kanumuri Gayatri Praharshita | Done       | Notebook                                                   |
+| Evaluated the approved rules and generated the DQ failure scorecard                               | Dharavath Sandhya            | Done       | `screenshots/week06_rule_scorecard.png`                    |
+| Routed valid records to Trusted Silver and failed records to Quarantine                           | Kanumuri Gayatri Praharshita | Done       | `screenshots/week06_trusted_quarantine_reconciliation.png` |
+| Validated Trusted and Quarantine reconciliation and zero intersection                             | Dharavath Sandhya            | Done       | `screenshots/week06_trusted_quarantine_reconciliation.png` |
+| Documented multi-rule failures and the correction/replay approach                                 | Charka Cherishma             | Done       | `screenshots/week06_failed_record.png`                     |
+| Captured Delta table history for Trusted Workouts and Quarantine Workouts                         | Kanumuri Gayatri Praharshita | Done       | `screenshots/week06_rerun_replay.png`                      |
+
+---
 
 ## 3. Key Decisions
 
-Followed the approved Team 11 Week 6 DQ rulebook and implemented the eight defined rule IDs within the Week 6 batch scope. DQ-EVT-001 was kept out of this week's implementation because it is specified for Week 10 streaming.
-Used the actual Week 5 table names (silver_users, silver_devices, silver_goals, silver_activity_types, silver_workouts) instead of silently renaming them to the _candidate names mentioned in the rulebook. The naming mismatch was identified for discussion with the mentor.
-Preserved multiple failed rule IDs for a single physical workout row instead of stopping after the first failure.
-Used CREATE OR REPLACE TABLE for Trusted and Quarantine outputs so controlled reruns do not accumulate duplicate records.
+* Used the Week 5 Silver Candidate tables as the inputs for Week 6 Data Quality processing.
+* Applied the approved FitPulse DQ rule IDs and their defined severities.
+* Evaluated the five Week 6 batch entities: **Activity Types, Users, Devices, Goals and Workouts**.
+* Routed each physical Candidate record to either Trusted Silver or Quarantine.
+* Preserved failed records in Quarantine rather than deleting or silently correcting them.
+* Retained all applicable DQ failures for a record instead of stopping after the first failure.
+* Applied the approved dependency order across the batch entities.
+* Verified that Candidate records are fully accounted for by the Trusted and Quarantine outputs.
+* Verified that no record appears in both Trusted and Quarantine.
+* Used `CREATE OR REPLACE TABLE` logic to support controlled reruns without accumulating duplicate records.
+* Treated corrections and replay as a controlled upstream process; existing Quarantine records were not directly edited.
+* Deferred `DQ-EVT-001` to Week 10 because it applies to streaming workout events.
+
+---
 
 ## 4. Blockers / Risks
 
-Blocker	Impact	Help Needed
-Duration tolerance for DQ-DUR-001 is marked as CONFIRM WITH MENTOR	Final workout duration validation cannot be considered fully approved until the tolerance is confirmed	Mentor confirmation
-Approved user_status domain needs confirmation	The domain check currently uses ACTIVE, INACTIVE and SUSPENDED and is marked for mentor confirmation	Mentor confirmation
-goal_type ↔ target_unit approved mapping is not finalized	Complete DQ-GOL-001 goal compatibility validation cannot be finalized	Mentor confirmation
-Goal-contribution activity-scope rule needs confirmation	Workout-to-goal contribution validation has a pending approved scope requirement	Mentor confirmation
-Rulebook table names differ from actual Week 5 table names	Could cause confusion between documentation and implementation	Discuss naming with mentor
+| **Blocker / Risk**                                                                                         | **Impact**                                                                                | **Resolution / Help Needed**                                                         |
+| ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Some Workout records fail multiple DQ rules                                                                | Failure reasons can be difficult to interpret when several rules apply to the same record | Retained all applicable failed rule IDs and assigned the highest applicable severity |
+| Week 6 rulebook uses `silver_candidate_*` naming while the implemented Week 5 tables use `silver_*` naming | Can create ambiguity when referring to the governed input tables                          | Documented the naming mismatch for review                                            |
+| Duration tolerance requires confirmation                                                                   | May affect the final interpretation of duration-related failures                          | Requires mentor confirmation before being treated as finalized                       |
+| Domain value lists require confirmation                                                                    | May affect validation of categorical fields                                               | Requires mentor confirmation                                                         |
+| `goal_type` / `target_unit` pairing requires confirmation                                                  | May affect goal validity checks                                                           | Requires mentor confirmation                                                         |
+| Streaming event validation was not part of the Week 6 batch scope                                          | `DQ-EVT-001` could not be evaluated during Week 6                                         | Deferred `DQ-EVT-001` to Week 10 streaming validation                                |
 
 ---
 
 ## 5. Evidence Added to GitHub
 
--04_data_quality_checks.ipynb — Week 6 Data Quality Checks notebook.
-SQL checks for baseline Candidate counts.
-SQL logic for Trusted Silver and Quarantine routing.
-Rule scorecard query.
-Candidate/Trusted/Quarantine reconciliation query.
-Trusted ∩ Quarantine membership validation.
-Multi-rule workout failure inspection.
-DESCRIBE HISTORY queries for controlled rerun verification.
+### Notebook
 
-The notebook contains the complete SQL implementation and exit checklist for these validations.
+* `notebooks/04_data_quality_checks.ipynb`
+
+### Documentation
+
+* `docs/data_quality_summary.md`
+
+### Screenshots
+
+* `screenshots/week06_dq_rules.png`
+* `screenshots/week06_rule_scorecard.png`
+* `screenshots/week06_trusted_quarantine_reconciliation.png`
+* `screenshots/week06_failed_record.png`
+* `screenshots/week06_rerun_replay.png`
+
+### Weekly Log
+
+* `weekly_logs/week06_log.md`
+
 ---
 
 ## 6. AI Transparency Note
 
-Question	Response
-Where AI helped	AI was used to assist with structuring the Week 6 data-quality workflow, SQL checks, routing logic and reconciliation approach based on the approved DQ rulebook.
-What we changed after AI suggestion	The implementation was aligned with Team 11's actual Week 5 table names and dependency order. The notebook also explicitly preserved the naming mismatch instead of silently changing table names.
-What we verified manually	The DQ rule IDs, entity scope, routing destinations, dependency order, reconciliation logic and mentor-confirmation placeholders were reviewed against the approved Week 6 requirements.
-What we can explain without AI	We can explain how each entity is checked, how records are classified as PASS/FAIL, how Trusted and Quarantine tables are created, how failed rule IDs are retained, and how reconciliation proves that records are not lost or duplicated.
+| **Question**                        | **Response**                                                                                                                                                                                                                                                                 |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Where AI helped                     | AI was used to explain DQ rule implementation, PASS/FAIL evaluation, Trusted and Quarantine routing, DQ metadata, reconciliation and correction/replay concepts.                                                                                                             |
+| What we changed after AI suggestion | The team reviewed and aligned the rule conditions, rule IDs, entity names, table names, dependency order and routing logic with the approved FitPulse DQ rulebook and actual Databricks implementation.                                                                      |
+| What we verified manually           | Reviewed the Silver Candidate inputs, DQ rule results, Trusted and Quarantine routing, failure metadata, reconciliation results, multi-rule failures and Delta table history in Databricks.                                                                                  |
+| What we can explain without AI      | We can explain how DQ rules are evaluated, why records are routed to Trusted or Quarantine, how multiple failures are retained, how Trusted and Quarantine reconciliation works, and why quarantined records should be corrected upstream and replayed through the pipeline. |
 
 ---
 
 ## 7. Next Week Preparation
 
--Confirm the pending DQ thresholds and domain mappings with the mentor.
-Remove CONFIRM WITH MENTOR placeholders after approval.
-Run the notebook against the actual Week 5 Candidate snapshot.
-Capture actual Candidate, Trusted and Quarantine counts.
-Verify variance = 0 for Users, Devices, Goals and Workouts.
-Verify Trusted ∩ Quarantine = 0.
-Capture rule scorecard and multi-rule failure evidence.
-Capture DESCRIBE HISTORY evidence after a controlled rerun.
-Report and resolve the silver_candidate_* vs silver_* naming mismatch.
+* Use only the Trusted Silver outputs as inputs for Week 7 Gold processing.
+* Review the approved Gold tables, grains, business keys and KPI definitions.
+* Validate the Gold aggregation logic against the Trusted Silver data.
+* Ensure that fact-to-fact joins and aggregate calculations do not introduce double counting.
+* Prepare the Gold outputs required for downstream Power BI analytics.
