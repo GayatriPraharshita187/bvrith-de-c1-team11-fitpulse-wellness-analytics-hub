@@ -9,7 +9,7 @@ The dashboard is built from approved **Gold-layer outputs** and is intended to p
 The final Power BI file should be saved here:
 
 ```text
-dashboard/powerbi_dashboard.pbix
+dashboard/finaldashboard
 ```
 
 The Power BI dashboard uses the approved Gold outputs as its analytical source.
